@@ -30,12 +30,11 @@ void CSVFileReader::fileParse(const QString &fileUrl)
         QTextStream stream(&csvFile);
         while (!stream.atEnd()) {
             tmpStr = stream.readLine();
-            strList = tmpStr.split(separator, QString::SkipEmptyParts);
+            strList = tmpStr.split(separator);
+            strList.pop_back();
             dataList.push_back(strList);
         }
         csvFile.close();
-        int i = 0;
-        ++i;
     }
     else
         emit sendInfoMsg("The file was not opened.");
