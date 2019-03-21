@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QList>
 #include <QStringList>
+#include <QVariant>
 
 class CSVFileReader : public QObject
 {
@@ -14,13 +15,16 @@ public:
     explicit CSVFileReader(QObject *parent = nullptr);
 
 private:
-    QString convertFileUrl(const QString &fileUrl);
+    void convertFileUrl(QString &fileUrl);
     bool openCSVFile(const QString &filePath);
 signals:
-    void sendInfoMsg(QString msg);
+    void sendInfoMsg(QVariant msg);
+    void fileIsParsed(int numberOfRows, int numberOfColumns);
 
 public slots:
     void fileParse(const QString &fileUrl);
+    int getNumberOfColumns() const { return (dataList.isEmpty() ? 0 : dataList.at(0).size()); }
+    int getNumberOfRows() const { return dataList.size(); }
 
 private:
     QFile csvFile;

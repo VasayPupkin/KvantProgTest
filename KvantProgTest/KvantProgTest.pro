@@ -15,7 +15,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cc \
     Mediator.cc \
-    CSVFileReader.cc
+    CSVFileReader.cc \
+    QMLWidget.cc \
+    TableModel.cc
 
 RESOURCES += qml.qrc
 
@@ -32,7 +34,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Mediator.h \
-    CSVFileReader.h
+    CSVFileReader.h \
+    QMLWidget.h \
+    TableModel.h
 
 DISTFILES += \
     TestData.csv

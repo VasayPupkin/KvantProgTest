@@ -6,12 +6,10 @@ CSVFileReader::CSVFileReader(QObject *parent) : QObject(parent)
 
 }
 
-QString CSVFileReader::convertFileUrl(const QString &fileUrl)
+void CSVFileReader::convertFileUrl(QString &fileUrl)
 {
 //file:///media/oleg/c2593705-a894-489d-b565-859702b4a4b4/oleg/KirichekOI/GitHubRepository/KvantProgTest/KvantProgTest/TestData.csv
-    QString str = fileUrl;
-    str = str.replace("file://","");
-    return str;
+    fileUrl = fileUrl.replace("file://","");
 }
 
 bool CSVFileReader::openCSVFile(const QString &filePath)
@@ -22,8 +20,9 @@ bool CSVFileReader::openCSVFile(const QString &filePath)
 
 void CSVFileReader::fileParse(const QString &fileUrl)
 {
-
-    if(openCSVFile(convertFileUrl(fileUrl))){
+    QString filePath = fileUrl;
+    convertFileUrl(filePath);
+    if(openCSVFile(filePath)){
         dataList.clear();
         QString tmpStr;
         QStringList strList;
@@ -35,7 +34,8 @@ void CSVFileReader::fileParse(const QString &fileUrl)
             dataList.push_back(strList);
         }
         csvFile.close();
+        emit fileIsParsed(getNumberOfRows(), getNumberOfColumns());
     }
     else
-        emit sendInfoMsg("The file was not opened.");
+        emit sendInfoMsg(fileUrl + " was not opened.");
 }
