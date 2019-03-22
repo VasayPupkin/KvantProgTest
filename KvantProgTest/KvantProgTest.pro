@@ -1,4 +1,4 @@
-QT += quick
+QT += quick widgets
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -17,7 +17,8 @@ SOURCES += \
     Mediator.cc \
     CSVFileReader.cc \
     QMLWidget.cc \
-    TableModel.cc
+    TableModel.cc \
+    TableViewWindow.cc
 
 RESOURCES += qml.qrc
 
@@ -36,7 +37,11 @@ HEADERS += \
     Mediator.h \
     CSVFileReader.h \
     QMLWidget.h \
-    TableModel.h
+    TableModel.h \
+    TableViewWindow.h
 
 DISTFILES += \
     TestData.csv
+
+FORMS += \
+    TableViewWindow.ui

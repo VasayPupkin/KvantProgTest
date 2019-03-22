@@ -1,10 +1,16 @@
-import QtQuick 2.11
+//https://doc-snapshots.qt.io/qt5-5.12/qml-qtquick-tableview.html#details
+//https://doc.qt.io/qt-5/qtquick-modelviewsdata-cppmodels.html
+//https://andrew-jones.com/blog/qml2-to-c---and-back-again-with-signals-and-slots/ !!!!!
+//https://felgo.com/cross-platform-development/how-to-expose-a-qt-cpp-class-with-signals-and-slots-to-qml
+
+import QtQuick 2.10
+import QtQuick.Layouts 1.3
 import QtQuick.Window 2.10
 import QtQuick.Controls 2.4
 import QtQuick.Controls 1.4 as OldControls
 import QtQuick.Dialogs 1.2
 
-import TableModel 1.0
+//import TableModel 1.0
 
 Window {
     id: appWindow
@@ -19,6 +25,11 @@ Window {
     function setTextFieldText(str){
         fileNameTextField.text = str;
     }
+
+//    function setTableViewVisible(tableViewModel){
+//        tableView.visible = true;
+//        tableView.model = tableViewModel;
+//    }
 
     FileDialog{
         id: openFileDialog
@@ -70,11 +81,12 @@ Window {
 
 //    OldControls.TableView {
 //        id : tableView
-////        visible: true
-//        frameVisible: false
+//        visible: false
+//        frameVisible: true
 //        sortIndicatorVisible: true
 //        property int tableViewWidth: parent.width - 2*elementMargin
-//        clip: true
+//        anchors.topMargin: 13
+//        clip: false
 
 //        anchors {
 //            left: parent.left
@@ -83,7 +95,6 @@ Window {
 //            bottom: parent.bottom
 //            leftMargin: elementMargin
 //            rightMargin: elementMargin
-//            topMargin: elementMargin
 //            bottomMargin: elementMargin
 //        }
 
