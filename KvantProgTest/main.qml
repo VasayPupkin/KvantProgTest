@@ -2,17 +2,19 @@
 //https://doc.qt.io/qt-5/qtquick-modelviewsdata-cppmodels.html
 //https://andrew-jones.com/blog/qml2-to-c---and-back-again-with-signals-and-slots/ !!!!!
 //https://felgo.com/cross-platform-development/how-to-expose-a-qt-cpp-class-with-signals-and-slots-to-qml
+//https://stackoverflow.com/questions/21270969/using-a-qabstracttablemodel-with-a-qml-tableview-only-displays-the-1st-column
 
-import QtQuick 2.10
+import QtQuick 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.10
-import QtQuick.Controls 2.4
-import QtQuick.Controls 1.4 as OldControls
+//import QtQuick.Controls 2.4
+//import QtQuick.Controls 1.4 as OldControls
+import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.2
 
 //import TableModel 1.0
 
-Window {
+ApplicationWindow {
     id: appWindow
     visible: true
     width: 640
@@ -25,11 +27,6 @@ Window {
     function setTextFieldText(str){
         fileNameTextField.text = str;
     }
-
-//    function setTableViewVisible(tableViewModel){
-//        tableView.visible = true;
-//        tableView.model = tableViewModel;
-//    }
 
     FileDialog{
         id: openFileDialog
@@ -50,7 +47,7 @@ Window {
         id :fileNameTextField
         width: (parent.width*4)/5 - openFileBtn.anchors.leftMargin - openFileBtn.anchors.rightMargin
                - anchors.leftMargin;
-        height: 30
+//        height: 30
 
         anchors {
             top: parent.top
@@ -79,33 +76,51 @@ Window {
         }
     }
 
-//    OldControls.TableView {
-//        id : tableView
-//        visible: false
-//        frameVisible: true
-//        sortIndicatorVisible: true
-//        property int tableViewWidth: parent.width - 2*elementMargin
-//        anchors.topMargin: 13
-//        clip: false
+    TableView{
+        id: tableView
+        visible: true
+        frameVisible: true
+        parent: appWindow
+        implicitWidth: parent.width
 
-//        anchors {
-//            left: parent.left
-//            right: parent.right
-//            top: fileNameTextField.bottom
-//            bottom: parent.bottom
-//            leftMargin: elementMargin
-//            rightMargin: elementMargin
-//            bottomMargin: elementMargin
-//        }
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: fileNameTextField.bottom
+            bottom: parent.bottom
+            leftMargin: elementMargin
+            rightMargin: elementMargin
+            topMargin: elementMargin
+            bottomMargin: elementMargin
+        }
 
-//        model: TableModel {}
-//        itemDelegate: Rectangle {
-//            implicitWidth: 50
-//            implicitHeight: 50
-//            Text {
-//                text: display
-//            }
-//        }
-//    }
+        TableViewColumn {
+            id: idColumn
+            title: "USER_ID"
+            role: "user_id"
+            movable: false
+            resizable: false
+            width: tableView.implicitWidth/3
+        }
 
+        TableViewColumn {
+            id: nameColumn
+            title: "USER_NAME"
+            role: "user_name"
+            movable: false
+            resizable: false
+            width: tableView.implicitWidth/3
+        }
+
+        TableViewColumn {
+            id: phoneColumn
+            title: "USER_PHONE"
+            role: "user_phone"
+            movable: false
+            resizable: false
+            width: tableView.implicitWidth/3
+        }
+
+        model: TableModel
+    }
 }

@@ -19,17 +19,16 @@ private:
     bool openCSVFile(const QString &filePath);
 signals:
     void sendInfoMsg(QVariant msg);
-    void fileIsParsed(int numberOfRows, int numberOfColumns);
+    void fileIsParsed();
 
 public slots:
     void fileParse(const QString &fileUrl);
-    int getNumberOfColumns() const { return (dataList.isEmpty() ? 0 : dataList.at(0).size()); }
-    int getNumberOfRows() const { return dataList.size(); }
+    QList<QStringList> getDataList() const { return dataList_; }
 
 private:
-    QFile csvFile;
-    const QString separator{";"};
-    QList<QStringList> dataList;
+    QFile csvFile_;
+    const QString separator_{";"};
+    QList<QStringList> dataList_;
 };
 
 #endif // CSVFILEREADER_H

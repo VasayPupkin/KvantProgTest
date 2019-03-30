@@ -8,8 +8,6 @@
 #include "CSVFileReader.h"
 #include "TableModel.h"
 
-#include "TableViewWindow.h"
-
 class Mediator : public QObject
 {
     Q_OBJECT
@@ -23,17 +21,15 @@ private:
     void connectObjects();
 
 signals:
-//    void setTableViewVisible(TableModel tableModel);
+    void setTableViewVisible();
 
 public slots:
-    void createTableModel(int numberOfRows, int numberOfColumns);
+    void createTableModel();
 
 private:
     QPointer<QMLWidget> qmlWdgt;
     QPointer<CSVFileReader> csvFileReader;
     QPointer<TableModel> tableModel;
-
-    QPointer<TableViewWindow> tableViewWindow;
 };
 
 #endif // MEDIATOR_H

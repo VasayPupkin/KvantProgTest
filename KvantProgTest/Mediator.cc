@@ -27,27 +27,16 @@ void Mediator::connectObjects()
 
     connect(csvFileReader.data(), SIGNAL(sendInfoMsg(QVariant)),
             engineObj, SLOT(setTextFieldText(QVariant)));
-    connect(csvFileReader.data(),SIGNAL(fileIsParsed(int,int)),
-            SLOT(createTableModel(int,int)));
+    connect(csvFileReader.data(),SIGNAL(fileIsParsed()),
+            SLOT(createTableModel()));
 }
 
-void Mediator::createTableModel(int numberOfRows, int numberOfColumns)
+void Mediator::createTableModel()
 {
-//    tableModel = new TableModel();
-////    qmlWdgt.data()->getEngine().data()->rootContext()->setContextProperty("TableModel", tableModel.data());
-//    for(int i = 0 ; i < 5 ;++i){
-//        for (int j = 0; j < 5; ++j) {
-//            tableModel.data()->setData(tableModel.data()->index(0,0),"MFK!!!");
-//        }
-//    }
-//    emit setTableViewVisible(*(tableModel.data()));
-    tableModel = new TableModel(10,10);
-    tableViewWindow = new TableViewWindow();
-    tableViewWindow.data()->getTableView()->setModel(tableModel.data());
-    for(int i = 0 ; i < 5 ;++i){
-        for (int j = 0; j < 5; ++j) {
-            tableModel.data()->setData(tableModel.data()->index(0,0),"MFK!!!",0);
-        }
-    }
-    tableViewWindow.data()->show();
+    if (!tableModel.isNull())
+        tableModel.clear();
+    tableModel = new TableModel(this);
+    tableModel.data()->setDataList(csvFileReader.data()->getDataList());
+    qmlWdgt.data()->getEngine().data()->rootContext()->setContextProperty("TableModel", tableModel.data());
+
 }

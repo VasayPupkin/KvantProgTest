@@ -18,7 +18,6 @@ SOURCES += \
     CSVFileReader.cc \
     QMLWidget.cc \
     TableModel.cc \
-    TableViewWindow.cc
 
 RESOURCES += qml.qrc
 
@@ -37,11 +36,8 @@ HEADERS += \
     Mediator.h \
     CSVFileReader.h \
     QMLWidget.h \
-    TableModel.h \
-    TableViewWindow.h
+    TableModel.h
 
 DISTFILES += \
     TestData.csv
 
-FORMS += \
-    TableViewWindow.ui

@@ -14,8 +14,8 @@ void CSVFileReader::convertFileUrl(QString &fileUrl)
 
 bool CSVFileReader::openCSVFile(const QString &filePath)
 {
-    csvFile.setFileName(filePath);
-    return csvFile.open(QIODevice::ReadOnly | QIODevice::Text);
+    csvFile_.setFileName(filePath);
+    return csvFile_.open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
 void CSVFileReader::fileParse(const QString &fileUrl)
@@ -23,18 +23,18 @@ void CSVFileReader::fileParse(const QString &fileUrl)
     QString filePath = fileUrl;
     convertFileUrl(filePath);
     if(openCSVFile(filePath)){
-        dataList.clear();
+        dataList_.clear();
         QString tmpStr;
         QStringList strList;
-        QTextStream stream(&csvFile);
+        QTextStream stream(&csvFile_);
         while (!stream.atEnd()) {
             tmpStr = stream.readLine();
-            strList = tmpStr.split(separator);
+            strList = tmpStr.split(separator_);
             strList.pop_back();
-            dataList.push_back(strList);
+            dataList_.push_back(strList);
         }
-        csvFile.close();
-        emit fileIsParsed(getNumberOfRows(), getNumberOfColumns());
+        csvFile_.close();
+        emit fileIsParsed();
     }
     else
         emit sendInfoMsg(fileUrl + " was not opened.");
