@@ -8,7 +8,6 @@ CSVFileReader::CSVFileReader(QObject *parent) : QObject(parent)
 
 void CSVFileReader::convertFileUrl(QString &fileUrl)
 {
-//file:///media/oleg/c2593705-a894-489d-b565-859702b4a4b4/oleg/KirichekOI/GitHubRepository/KvantProgTest/KvantProgTest/TestData.csv
     fileUrl = fileUrl.replace("file://","");
 }
 

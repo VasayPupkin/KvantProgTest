@@ -1,18 +1,8 @@
-//https://doc-snapshots.qt.io/qt5-5.12/qml-qtquick-tableview.html#details
-//https://doc.qt.io/qt-5/qtquick-modelviewsdata-cppmodels.html
-//https://andrew-jones.com/blog/qml2-to-c---and-back-again-with-signals-and-slots/ !!!!!
-//https://felgo.com/cross-platform-development/how-to-expose-a-qt-cpp-class-with-signals-and-slots-to-qml
-//https://stackoverflow.com/questions/21270969/using-a-qabstracttablemodel-with-a-qml-tableview-only-displays-the-1st-column
-
 import QtQuick 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.10
-//import QtQuick.Controls 2.4
-//import QtQuick.Controls 1.4 as OldControls
 import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.2
-
-//import TableModel 1.0
 
 ApplicationWindow {
     id: appWindow
@@ -47,7 +37,6 @@ ApplicationWindow {
         id :fileNameTextField
         width: (parent.width*4)/5 - openFileBtn.anchors.leftMargin - openFileBtn.anchors.rightMargin
                - anchors.leftMargin;
-//        height: 30
 
         anchors {
             top: parent.top

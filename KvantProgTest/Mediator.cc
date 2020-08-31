@@ -22,6 +22,7 @@ void Mediator::connectObjects()
 {
     QQmlApplicationEngine *engine = qmlWdgt.data()->getEngine();
     QObject *engineObj = engine->rootObjects().first();
+
     connect(engineObj, SIGNAL(setFileName(QString)),
             csvFileReader.data(), SLOT(fileParse(QString)));
 

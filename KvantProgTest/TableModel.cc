@@ -8,13 +8,6 @@ TableModel::TableModel(QObject *parent):
 void TableModel::setDataList(QList<QStringList> dataList)
 {
     dataList_ = dataList;
-//    int row = dataList_.size();
-//    int column = dataList_.first().size();
-//    for (auto i = 0;i < row; ++i) {
-//        for (auto j = 0; j < column; ++j) {
-//            setData(index(i,j),dataList_.at(i).at(j),Qt::EditRole);
-//        }
-//    }
     emit dataChanged(index(0,0),
                      index(dataList_.size()-1,dataList_.first().size() - 1),
                      {UserIdRole,UserNameRole,UserPhoneRole});
@@ -39,15 +32,6 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
         return QVariant();
     if (role == Qt::TextAlignmentRole)
         return QVariant(Qt::AlignCenter);
-//    else if (role == Qt::DisplayRole) {
-//        if (index.row() >= rowCount(index) || index.row() < 0) {
-//            return  QVariant();
-//        }
-//        if (index.column() >= columnCount(index) || index.column() < 0) {
-//            return  QVariant();
-//        }
-//        return QVariant(dataList_.at(index.row()).at(index.column()));
-//    }
     if (role == UserIdRole) {
         return QVariant(dataList_.at(index.row()).at(0));
     }
@@ -84,7 +68,7 @@ bool TableModel::setData(const QModelIndex &index, const QVariant &value, int ro
         int row = index.row();
         int column = index.column();
         dataList_[row][column] = value.toString();
-        emit dataChanged(index,index,{role/*,UserIdRole,UserNameRole,UserPhoneRole*/});
+        emit dataChanged(index,index,{role});
         return true;
     }
     return  false;
