@@ -1,8 +1,9 @@
 import QtQuick 2.12
-import QtQuick.Layouts 1.3
-import QtQuick.Window 2.10
-import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
 import QtQuick.Dialogs 1.2
+import QtQuick.Controls 1.4 as OldControls
 
 ApplicationWindow {
     id: appWindow
@@ -11,105 +12,97 @@ ApplicationWindow {
     height: 480
     title: qsTr("KvantProgTest")
 
-    property int elementMargin: 5
     signal setFileName(string str)
-
-    function setTextFieldText(str){
+    function setTextFieldText(str) {
         fileNameTextField.text = str;
     }
 
-    FileDialog{
+    FileDialog {
         id: openFileDialog
         title: "Open file"
         folder: shortcuts.home
         selectExisting: true
-        nameFilters: ["All files (*)"]
+        nameFilters: ["CSV files (*.csv)", "All files (*)"]
         onAccepted: {
             fileNameTextField.text = fileUrl;
             setFileName(fileNameTextField.text);
+
         }
         onRejected: {
             fileNameTextField.text = "Canceled";
         }
     }
 
-    TextField {
-        id :fileNameTextField
-        width: (parent.width*4)/5 - openFileBtn.anchors.leftMargin - openFileBtn.anchors.rightMargin
-               - anchors.leftMargin;
-
-        anchors {
-            top: parent.top
-            left: parent.left
-            leftMargin: elementMargin
-            topMargin: elementMargin
-        }
-        readOnly: true
-        horizontalAlignment: TextInput.AlignHCenter
-    }
-
     Button {
         id: openFileBtn
-        width: parent.width/5
-        height: fileNameTextField.height
-        anchors {
-            top: parent.top
-            left: fileNameTextField.right
-            topMargin: elementMargin
-            leftMargin: elementMargin
-            rightMargin: elementMargin
-        }
-        text: "Open file"
+        x: 530
+        text: qsTr("Open file")
+        clip: false
+        highlighted: true
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.top: parent.top
+        anchors.topMargin: 11
         onClicked: {
             openFileDialog.open();
         }
     }
 
-    TableView{
+    TextField {
+        id: fileNameTextField
+        height: 40
+        horizontalAlignment: Text.AlignHCenter
+        anchors.right: openFileBtn.left
+        anchors.rightMargin: 11
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.top: parent.top
+        anchors.topMargin: 11
+        readOnly: true
+    }
+
+    OldControls.TableView {
         id: tableView
-        visible: true
-        frameVisible: true
+        clip: true
         parent: appWindow
-        implicitWidth: parent.width
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        anchors.top: fileNameTextField.bottom
+        anchors.topMargin: 10
+        frameVisible: true
 
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: fileNameTextField.bottom
-            bottom: parent.bottom
-            leftMargin: elementMargin
-            rightMargin: elementMargin
-            topMargin: elementMargin
-            bottomMargin: elementMargin
-        }
-
-        TableViewColumn {
+        OldControls.TableViewColumn {
             id: idColumn
             title: "USER_ID"
             role: "user_id"
             movable: false
-            resizable: false
-            width: tableView.implicitWidth/3
+            resizable: true
+            width: tableView.viewport.width/3
         }
 
-        TableViewColumn {
+        OldControls.TableViewColumn {
             id: nameColumn
             title: "USER_NAME"
             role: "user_name"
             movable: false
-            resizable: false
-            width: tableView.implicitWidth/3
+            resizable: true
+            width: tableView.viewport.width/3
         }
 
-        TableViewColumn {
+        OldControls.TableViewColumn {
             id: phoneColumn
             title: "USER_PHONE"
             role: "user_phone"
             movable: false
-            resizable: false
-            width: tableView.implicitWidth/3
+            resizable: true
+            width: tableView.viewport.width/3
         }
 
         model: TableModel
     }
 }
+

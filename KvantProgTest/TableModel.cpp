@@ -15,7 +15,7 @@ void TableModel::setDataList(QList<QStringList> dataList)
 
 int TableModel::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED(parent);
+    Q_UNUSED(parent)
     return dataList_.size();
 }
 

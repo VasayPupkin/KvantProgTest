@@ -15,8 +15,8 @@ public:
     explicit CSVFileReader(QObject *parent = nullptr);
 
 private:
-    void convertFileUrl(QString &fileUrl);
-    bool openCSVFile(const QString &filePath);
+    inline void convertFileUrl(QString &fileUrl);
+    inline bool openCSVFile(const QString &filePath);
 signals:
     void sendInfoMsg(QVariant msg);
     void fileIsParsed();

@@ -13,16 +13,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    CSVFileReader.cc \
-    Mediator.cc \
-    QMLWidget.cc \
-    TableModel.cc \
-    main.cc
+    CSVFileReader.cpp \
+    Mediator.cpp \
+    QMLWidget.cpp \
+    TableModel.cpp \
+    main.cpp
 
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+#QML_IMPORT_PATH += $$(QTDIR)/qml
+QML_IMPORT_PATH += /opt/Qt5.13.1/5.13.1/gcc_64/qml
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
